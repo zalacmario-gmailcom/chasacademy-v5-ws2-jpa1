@@ -68,5 +68,9 @@ public class BlogApplication implements CommandLineRunner {
 		// spara posten
 		postRepository.save(newPost);
 
+		commentRepository.findByInappropriateIsFalse().forEach(comment -> {
+			System.out.println("Comment ID: " + comment.getCommentId() + " Text: " + comment.getComment());
+		});
+
 	}
 }
