@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import se.chasacademy.databaser.wsjpa.blog.models.Comment;
 import se.chasacademy.databaser.wsjpa.blog.models.Post;
+import se.chasacademy.databaser.wsjpa.blog.repositories.CommentRepository;
 import se.chasacademy.databaser.wsjpa.blog.repositories.PostRepository;
 
 import java.time.LocalDateTime;
@@ -14,9 +15,11 @@ import java.util.Optional;
 @SpringBootApplication
 public class BlogApplication implements CommandLineRunner {
 	private PostRepository postRepository;
+	private CommentRepository commentRepository;
 
-	public BlogApplication(PostRepository postRepository) {
+	public BlogApplication(PostRepository postRepository, CommentRepository commentRepository) {
 		this.postRepository = postRepository;
+		this.commentRepository = commentRepository;
 	}
 
 	public static void main(String[] args) {
@@ -43,7 +46,11 @@ public class BlogApplication implements CommandLineRunner {
 			postRepository.save(first);
 			// lista kommentarer
 			for (Comment comment : first.getComments()) {
-				System.out.println("Comment: " + comment.getComment());
+				System.out.println("Comment: " + comment.getComment() +
+						" is appropriate: " + (comment.isInappropriate() ? "No" : "Yes"));
+
+				comment.setInappropriate(true);
+				commentRepository.save(comment);
 			}
 		}
 
