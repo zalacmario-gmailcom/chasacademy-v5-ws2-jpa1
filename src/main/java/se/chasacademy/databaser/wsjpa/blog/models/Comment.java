@@ -24,8 +24,8 @@ public class Comment {
     @Column(name = "comment")
     private String comment_text;
 
-    @Column(name = "inappropriate")
-    private boolean isinappropriate;
+    @Column(name = "is_inappropriate")
+    private boolean inappropriate;
 
     public int getCommentId() {
         return commentId;
@@ -59,11 +59,11 @@ public class Comment {
         this.commentDate = commentDate;
     }
 
-    public boolean getisinappropriate() {
-        return isinappropriate;
+    public boolean isInappropriate() {
+        return inappropriate;
     }
 
-    public void setinappropriate(boolean inapporopriate) {
-        isinappropriate = inapporopriate;
+    public void setInappropriate(boolean inappropriate) {
+        this.inappropriate = inappropriate;
     }
 }
