@@ -39,4 +39,5 @@ insert into comment(title, comment)
 values('Bra jobbat', 'Fantastisk databas'),
     ('God mat', 'Lussebullar är goda');
 insert into post_comments
-values(1, 1);
+values(1, 1),
+    (2, 1);
