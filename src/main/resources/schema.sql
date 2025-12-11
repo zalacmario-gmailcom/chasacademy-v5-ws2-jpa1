@@ -21,7 +21,13 @@ create table post_comments (
     post_id int not null references post(post_id),
     primary key(comment_id, post_id)
 );
-insert into post(title, posttext, author, publish_date, create_date)
+insert into post(
+        title,
+        posttext,
+        author,
+        publish_date,
+        create_date
+    )
 values(
         'Första inlägget',
         'I en enkel bloggdatabas.',
@@ -30,6 +36,7 @@ values(
         now() - INTERVAL '2 days'
     );
 insert into comment(title, comment)
-values('Bra jobbat', 'Fantastisk databas');
+values('Bra jobbat', 'Fantastisk databas'),
+    ('God mat', 'Lussebullar är goda');
 insert into post_comments
 values(1, 1);
