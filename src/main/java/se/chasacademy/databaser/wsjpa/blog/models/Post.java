@@ -3,6 +3,8 @@ package se.chasacademy.databaser.wsjpa.blog.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Post {
@@ -13,10 +15,22 @@ public class Post {
     private String title, posttext, author;
     @Column
     private LocalDateTime publishDate, createDate;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "post_comments", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "comment_id"))
+    private List<Comment> comments = new ArrayList<>();
 
-    public Post(){
+    public List<Comment> getComments() {
+        return comments;
     }
-    public Post(String titel, String posttext, String author){
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Post() {
+    }
+
+    public Post(String titel, String posttext, String author) {
         this.title = titel;
         this.posttext = posttext;
         this.author = author;
