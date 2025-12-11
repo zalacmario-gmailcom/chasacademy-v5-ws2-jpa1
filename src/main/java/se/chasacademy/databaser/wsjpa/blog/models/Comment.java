@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "comments")
+@Table(name = "comment")
 public class Comment {
 
     @Id
@@ -21,7 +21,7 @@ public class Comment {
     @Column(name = "comment_date")
     private LocalDateTime commentDate;
 
-    @Column(name = "comment_text")
+    @Column(name = "comment")
     private String comment_text;
 
     public int getCommentId() {
@@ -56,4 +56,3 @@ public class Comment {
         this.commentDate = commentDate;
     }
 }
-
