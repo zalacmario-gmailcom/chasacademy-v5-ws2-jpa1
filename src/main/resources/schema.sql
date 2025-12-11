@@ -1,6 +1,6 @@
-delete table if exists post_comments;
-delete table if exists comment;
-delete table if exists post;
+drop table if exists post_comments;
+drop table if exists comment;
+drop table if exists post;
 create table post (
     post_id bigint generated always as identity primary key,
     title varchar(128) not null,
@@ -13,19 +13,23 @@ create table comment (
     comment_id bigint generated always as identity primary key,
     title varchar(64) not null,
     comment text not null,
-    comment_date timestamp default now()
+    comment_date timestamp default now(),
+    is_inappropriate boolean default false
 );
 create table post_comments (
     comment_id int not null references comment(comment_id),
     post_id int not null references post(post_id),
     primary key(comment_id, post_id)
 );
-insert into post
+insert into post(title, posttext, author, publish_date, create_date)
 values(
-        1,
         'Första inlägget',
         'I en enkel bloggdatabas.',
         'Admin',
         now(),
         now() - INTERVAL '2 days'
     );
+insert into comment(title, comment)
+values('Bra jobbat', 'Fantastisk databas');
+insert into post_comments
+values(1, 1);
