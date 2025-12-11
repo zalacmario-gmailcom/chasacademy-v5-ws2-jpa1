@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import se.chasacademy.databaser.wsjpa.blog.models.Post;
 import se.chasacademy.databaser.wsjpa.blog.repositories.PostRepository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -45,5 +46,12 @@ public class BlogApplication implements CommandLineRunner {
 		if (delete) {
 			postRepository.deleteById(1L);
 		}
+
+        //skapa ny post
+        Post newPost = new Post("Hello JPA", "This is my first post saved with JPA!", "Admin");
+
+        //spara posten
+        postRepository.save(newPost);
+
 	}
 }
