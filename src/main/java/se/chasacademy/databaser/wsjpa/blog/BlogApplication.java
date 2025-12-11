@@ -49,8 +49,10 @@ public class BlogApplication implements CommandLineRunner {
 				System.out.println("Comment: " + comment.getComment() +
 						" is appropriate: " + (comment.isInappropriate() ? "No" : "Yes"));
 
-				comment.setInappropriate(true);
-				commentRepository.save(comment);
+				if (comment.getCommentId() == 2) {
+					comment.setInappropriate(true);
+					commentRepository.save(comment);
+				}
 			}
 		}
 
