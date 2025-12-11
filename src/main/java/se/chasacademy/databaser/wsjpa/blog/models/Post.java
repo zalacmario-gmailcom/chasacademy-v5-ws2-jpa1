@@ -14,6 +14,16 @@ public class Post {
     @Column
     private LocalDateTime publishDate, createDate;
 
+    public Post(){
+    }
+    public Post(String titel, String posttext, String author){
+        this.title = titel;
+        this.posttext = posttext;
+        this.author = author;
+        this.createDate = LocalDateTime.now();
+        this.publishDate = LocalDateTime.now();
+    }
+
     public int getPostId() {
         return postId;
     }
