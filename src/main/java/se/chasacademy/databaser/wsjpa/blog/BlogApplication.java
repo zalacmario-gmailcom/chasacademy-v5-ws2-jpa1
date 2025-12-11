@@ -33,6 +33,13 @@ public class BlogApplication implements CommandLineRunner {
 			System.out.println("title: " + first.getTitle() + " published at: " + first.getPublishDate());
 		}
 
+		// - uppdatera inlägg
+		if (firstPost.isPresent()) {
+			Post first = firstPost.get();
+			first.setTitle("Uppdaterad titel");
+			postRepository.save(first);
+		}
+
 		// - ta bort inlägg
 		boolean delete = false;
 		if (delete) {
