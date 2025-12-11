@@ -3,6 +3,8 @@ package se.chasacademy.databaser.wsjpa.blog;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import se.chasacademy.databaser.wsjpa.blog.models.Comment;
 import se.chasacademy.databaser.wsjpa.blog.models.Post;
 import se.chasacademy.databaser.wsjpa.blog.repositories.PostRepository;
 
@@ -39,6 +41,10 @@ public class BlogApplication implements CommandLineRunner {
 			Post first = firstPost.get();
 			first.setTitle("Uppdaterad titel");
 			postRepository.save(first);
+			// lista kommentarer
+			for (Comment comment : first.getComments()) {
+				System.out.println("Comment: " + comment.getComment());
+			}
 		}
 
 		// - ta bort inlägg
@@ -47,11 +53,11 @@ public class BlogApplication implements CommandLineRunner {
 			postRepository.deleteById(1L);
 		}
 
-        //skapa ny post
-        Post newPost = new Post("Hello JPA", "This is my first post saved with JPA!", "Admin");
+		// skapa ny post
+		Post newPost = new Post("Hello JPA", "This is my first post saved with JPA!", "Admin");
 
-        //spara posten
-        postRepository.save(newPost);
+		// spara posten
+		postRepository.save(newPost);
 
 	}
 }
