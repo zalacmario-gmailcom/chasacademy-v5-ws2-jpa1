@@ -24,13 +24,19 @@ public class BlogApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		for (Post current : postRepository.findAll()) {
-			System.out.println("title: "+current.getTitle()+" published at: "+current.getPublishDate());
+			System.out.println("title: " + current.getTitle() + " published at: " + current.getPublishDate());
 		}
 
 		Optional<Post> firstPost = postRepository.findById(1L);
 		if (firstPost.isPresent()) {
 			Post first = firstPost.get();
 			System.out.println("title: " + first.getTitle() + " published at: " + first.getPublishDate());
+		}
+
+		// - ta bort inlägg
+		boolean delete = false;
+		if (delete) {
+			postRepository.deleteById(1L);
 		}
 	}
 }
