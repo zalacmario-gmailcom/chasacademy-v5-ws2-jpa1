@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import se.chasacademy.databaser.wsjpa.blog.models.Post;
 import se.chasacademy.databaser.wsjpa.blog.repositories.PostRepository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -24,7 +25,7 @@ public class BlogApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		for (Post current : postRepository.findAll()) {
-			System.out.println("title: "+current.getTitle()+" published at: "+current.getPublishDate());
+			System.out.println("title: " + current.getTitle() + " published at: " + current.getPublishDate());
 		}
 
 		Optional<Post> firstPost = postRepository.findById(1L);
@@ -32,5 +33,25 @@ public class BlogApplication implements CommandLineRunner {
 			Post first = firstPost.get();
 			System.out.println("title: " + first.getTitle() + " published at: " + first.getPublishDate());
 		}
+
+		// - uppdatera inlägg
+		if (firstPost.isPresent()) {
+			Post first = firstPost.get();
+			first.setTitle("Uppdaterad titel");
+			postRepository.save(first);
+		}
+
+		// - ta bort inlägg
+		boolean delete = false;
+		if (delete) {
+			postRepository.deleteById(1L);
+		}
+
+        //skapa ny post
+        Post newPost = new Post("Hello JPA", "This is my first post saved with JPA!", "Admin");
+
+        //spara posten
+        postRepository.save(newPost);
+
 	}
 }
